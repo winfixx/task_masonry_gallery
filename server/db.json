@@ -1,0 +1,104 @@
+{
+  "authors": [
+    {
+      "id": 1,
+      "name": "Иван",
+      "surname": "Айвазовский",
+      "patronymic": "Константинович"
+    },
+    {
+      "id": 2,
+      "name": "Лоуренс",
+      "surname": "Альма-Тадема"
+    }
+  ],
+  "pictures": [
+    {
+      "id": 1,
+      "name": "Судно посреди шторма",
+      "imageUrl": "http://localhost:3001/images/1/1.png",
+      "authorId": 1
+    },
+    {
+      "id": 2,
+      "name": "Радуга",
+      "imageUrl": "http://localhost:3001/images/1/2.png",
+      "authorId": 1
+    },
+    {
+      "id": 3,
+      "name": "Кавказ",
+      "imageUrl": "http://localhost:3001/images/1/3.png",
+      "authorId": 1
+    },
+    {
+      "id": 4,
+      "name": "Вид из Ливадии",
+      "imageUrl": "http://localhost:3001/images/1/4.png",
+      "authorId": 1
+    },
+    {
+      "id": 5,
+      "name": "Черное море",
+      "imageUrl": "http://localhost:3001/images/1/5.png",
+      "authorId": 1
+    },
+    {
+      "id": 6,
+      "name": "Неаполитанский залив утром",
+      "imageUrl": "http://localhost:3001/images/1/6.png",
+      "authorId": 1
+    },
+    {
+      "id": 7,
+      "name": "Караван в оазисе. Египет",
+      "imageUrl": "http://localhost:3001/images/1/7.png",
+      "authorId": 1
+    },
+    {
+      "id": 8,
+      "name": "Розы Гелиогабала",
+      "imageUrl": "http://localhost:3001/images/2/1.png",
+      "authorId": 2
+    },
+    {
+      "id": 9,
+      "name": "Не спрашивай меня больше ни о чем",
+      "imageUrl": "http://localhost:3001/images/2/2.png",
+      "authorId": 2
+    },
+    {
+      "id": 10,
+      "name": "Любимое занятие",
+      "imageUrl": "http://localhost:3001/images/2/3.png",
+      "authorId": 2
+    },
+    {
+      "id": 11,
+      "name": "Расхождение во мнениях",
+      "imageUrl": "http://localhost:3001/images/2/4.png",
+      "authorId": 2
+    },
+    {
+      "id": 12,
+      "name": "Осенний праздник сбора винограда",
+      "imageUrl": "http://localhost:3001/images/2/5.png",
+      "authorId": 2
+    },
+    {
+      "id": 13,
+      "name": "Невольные соперницы",
+      "imageUrl": "http://localhost:3001/images/2/6.png",
+      "authorId": 2
+    },
+    {
+      "id": 14,
+      "name": "Выгодная позиция",
+      "imageUrl": "http://localhost:3001/images/2/7.png",
+      "authorId": 2
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

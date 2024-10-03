@@ -1,0 +1,16 @@
+$gap_masonry_container: 5px;
+
+.masonry {
+  display: flex;
+  justify-content: center;
+
+  .masonry_container {
+    max-width: 2000px;
+    padding: 10px 5px;
+    gap: $gap_masonry_container !important;
+
+    > div {
+      gap: $gap_masonry_container !important;
+    }
+  }
+}
