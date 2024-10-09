@@ -1,0 +1,44 @@
+@mixin setting-transition {
+  transition: all 0.1s linear;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  @include setting-transition;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+
+    .button {
+      background: rgb(146, 146, 146);
+    }
+  }
+
+  &:has(.button[disabled]),
+  .button[disabled] {
+    cursor: not-allowed;
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    padding: 6px;
+    border-radius: 50%;
+    @include setting-transition;
+    cursor: pointer;
+
+    > svg {
+      fill: #fff;
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

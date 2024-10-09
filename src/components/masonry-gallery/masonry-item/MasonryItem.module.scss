@@ -1,4 +1,5 @@
 .masonry_item {
+  position: relative;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -9,6 +10,7 @@
   transition: all 0.2s;
   animation: render 0.1s linear forwards;
   opacity: 0;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.01);
@@ -27,10 +29,39 @@
       margin: 0;
     }
   }
+
+  @mixin invisible-link {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    width: 50%;
+    height: 100%;
+  }
+
+  .invisible-link-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+
+    > div {
+      display: flex;
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .invisible-link {
+        @include invisible-link;
+      }
+    }
+  }
 }
+
 @keyframes render {
   from {
-    opacity: .5;
+    opacity: 0.5;
   }
   to {
     opacity: 1;

@@ -1,43 +1,35 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
+import Select from 'react-select'
 import MasonryGallery from '../../components/masonry-gallery/MasonryGallery'
-import AppSelect, { IAppSelectOption } from '../../components/select/AppSelect'
 import AuthorService from '../../core/services/AuthorService'
-import PictureService from '../../core/services/PictureService'
 
 const HomePage = () => {
   const [selectedAuthorId, setSelectedAuthorId] = useState('')
+  const [optionList, setOptionList] = useState<any>(undefined)
 
   const authorsNameQuery = useQuery({
     queryKey: ['authorsNameList'],
     queryFn: async () => await AuthorService.getAuthorsName()
   })
 
-  const picturesQuery = useQuery({
-    queryKey: ['picturesQuery'],
-    queryFn: async () => await PictureService.getPictures(undefined, +selectedAuthorId),
-  })
-
   useEffect(() => {
-    picturesQuery.refetch()
-  }, [selectedAuthorId])
-
-  const optionList: IAppSelectOption[] = []
-  if (authorsNameQuery.isSuccess) {
-    authorsNameQuery.data.forEach(a => {
-      optionList.push({ value: a.id.toString(), label: `${a.name} ${a.surname}` })
-    })
-  }
+    if (authorsNameQuery.isSuccess)
+      setOptionList(authorsNameQuery
+        .data.map(a => ({ value: a.id.toString(), label: a.name + ' ' + a.surname })))
+  }, [authorsNameQuery.isSuccess])
 
   return (
     <div>
-      <AppSelect
-        optionsList={optionList}
-        selectedOption={selectedAuthorId}
-        setSelectedOption={setSelectedAuthorId}
-      />
+      {optionList
+        && <Select
+          value={selectedAuthorId}
+          onChange={(option: any) => { setSelectedAuthorId(option.value) }}
+          options={optionList}
+        />
+      }
 
-      <MasonryGallery pictures={picturesQuery.data}/>
+      <MasonryGallery selectedAuthorId={selectedAuthorId} />
     </div >
   )
 }
