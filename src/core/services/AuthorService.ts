@@ -9,6 +9,10 @@ class AuthorService {
   public async getAuthorsName() {
     return await this.authorRepository.getAuthorsName()
   }
+
+  public async getAuthors() {
+    return await this.authorRepository.getAuthors()
+  }
 }
 
 export default new AuthorService(new AuthorMockRepository())
