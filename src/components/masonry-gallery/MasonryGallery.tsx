@@ -1,29 +1,27 @@
 import { useQuery } from '@tanstack/react-query'
 import { FC, useEffect } from 'react'
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+import GetAuthorsResponse from '../../core/dto/authors/GetAuthorsResponse'
 import PictureService from '../../core/services/PictureService'
-import { useAppDispatch } from '../../hooks/redux'
-import { imagesSliderModalAction } from '../../redux/reducers/imagesSliderModalSlice'
 import ImagesModal from '../modals/images-modal/ImagesModal'
-import styles from './MasonryGallery.module.scss'
-import MasonryItem from './masonry-item/MasonryItem'
+import MasonryList from './masonry-list/MasonryList'
 
 interface MasonryGalleryProps {
-  selectedAuthorId: string
+  selectedAuthor: GetAuthorsResponse | null
 }
 
-const MasonryGallery: FC<MasonryGalleryProps> = ({ selectedAuthorId }) => {
-  const dispatch = useAppDispatch()
-
+const MasonryGallery: FC<MasonryGalleryProps> = ({ selectedAuthor }) => {
   const { data: picturesData, refetch } = useQuery({
     queryKey: ['picturesQuery'],
-    queryFn: async () => await PictureService
-      .getPictures(undefined, +selectedAuthorId)
+    queryFn: async () => selectedAuthor
+      ? await PictureService
+        .getPictures(undefined, +selectedAuthor.id)
+      : await PictureService
+        .getPictures()
   })
 
   useEffect(() => {
     refetch()
-  }, [selectedAuthorId])
+  }, [selectedAuthor])
 
   return (
     <>
@@ -31,28 +29,11 @@ const MasonryGallery: FC<MasonryGalleryProps> = ({ selectedAuthorId }) => {
         ? <>
           <ImagesModal pictures={picturesData} />
 
-          <ResponsiveMasonry
-            className={styles.masonry}
-            columnsCountBreakPoints={{ 0: 1, 250: 2, 500: 3, 900: 4, 1024: 5, 1200: 6 }}
-          >
-            <Masonry className={styles.masonry_container}>
-              {picturesData.map((p, pIndex) =>
-                <MasonryItem
-                  key={p.id}
-                  picture={p}
-                  onOpenModal={() =>
-                    dispatch(imagesSliderModalAction
-                      .onShowModal({ currentPictureIndex: pIndex })
-                    )}
-                />
-              )}
-            </Masonry>
-          </ResponsiveMasonry>
+          <MasonryList pictures={picturesData}/>
         </>
         : <div>
           <h2>Ничего нет</h2>
-        </div>
-      }
+        </div>}
     </>
   )
 }
